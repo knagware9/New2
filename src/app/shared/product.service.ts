@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
-import { Product } from './product.model'
+import { Product } from './product.model';
 
 @Injectable()
 export class ProductService {
   productList: AngularFireList<any>;
-  productList2:AngularFireList<any>;
-  productList3:AngularFireList<any>;
+  productList2: AngularFireList<any>;
+  productList3: AngularFireList<any>;
   selectedProduct: Product = new Product();
   constructor(private firebase: AngularFireDatabase) {
 
@@ -17,7 +17,6 @@ export class ProductService {
   getData() {
     this.productList = this.firebase.list('products');
     return this.productList;
-    
   }
 
   getDistributerData() {
@@ -30,7 +29,6 @@ export class ProductService {
   }
 
   insertProduct(product: Product) {
-  
     this.productList.push({
       batchNumber: product.batchNumber,
       barcode: product.barcode,
@@ -43,7 +41,7 @@ export class ProductService {
       temperature: product.temperature,
       price: product.price,
       ownership: product.ownership,
-      comment:product.comment
+      comment: product.comment
 
     });
   }
@@ -62,7 +60,7 @@ export class ProductService {
         temperature: product.temperature,
         price: product.price,
         ownership: product.ownership,
-        comment:product.comment
+        comment: product.comment
       });
   }
 
@@ -74,8 +72,8 @@ export class ProductService {
     this.productList2.remove($key);
   }
 
-  transferProduct(product: Product, type:string) {
-    if(type=="distributer"){
+  transferProduct(product: Product, type: string) {
+    if(type == "distributer"){
       this.productList2 = this.firebase.list('Distributer');
       this.productList2.push({
         batchNumber: product.batchNumber,
@@ -89,8 +87,8 @@ export class ProductService {
         temperature: product.temperature,
         price: product.price,
         ownership: product.ownership,
-        comment:product.comment
-  
+        comment: product.comment
+
       });
     }else if (type=="retailer"){
       this.productList3 = this.firebase.list('Retailer');
@@ -106,11 +104,8 @@ export class ProductService {
         temperature: product.temperature,
         price: product.price,
         ownership: product.ownership,
-        comment:product.comment
-  
+        comment: product.comment
       });
     }
-   
-  
   }
 }
