@@ -1,0 +1,6 @@
+.panel-default > .panel-heading {
+    background-color: #FFBABA; 
+     /* change this to  reflect category_color: #b94a48 */
+    color: #b94a48;
+    font-weight: bold;
+  }

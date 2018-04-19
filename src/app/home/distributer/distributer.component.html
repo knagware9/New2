@@ -1,0 +1,49 @@
+<h6 class="text-center">
+  Distributer - Product List</h6>
+<table class="table table-sm table-hover">
+  <thead>
+    <tr class="table-danger">
+      <th scope="col">SR</th>
+      <th scope="col">Name</th>
+      <th scope="col">Expiry Date</th>
+      <th scope="col">Price</th>
+      <th scope="col">Transfer</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tr class="table-success" *ngFor="let product of productList; let i = index">
+    <th scope="row">{{i+1}}</th>
+    <td>{{ product.productName}}</td>
+    <td>{{ product.ownership}}</td>
+    <td>{{ product.expiryDate}}</td>
+    <td>{{ product.price}}</td>
+
+    <mat-form-field>
+        <mat-select placeholder="Transfer To">
+          <mat-option *ngFor="let option of options"  [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a class="btn" (click)="onTransfer(product,product.$key)">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </a>
+    <!-- <td>
+      <button mat-raised-button (click)="openDialog()">Transfer</button>
+    </td> -->
+  </tr>
+</table>
+
+<!-- <ol> -->
+  <!-- <li>
+    <mat-form-field>
+      <input matInput [(ngModel)]="name" placeholder="What's your name?">
+    </mat-form-field>
+  </li> -->
+  <!-- <li>
+    <button mat-raised-button (click)="openDialog()">Pick one</button>
+  </li> -->
+  <!-- <li *ngIf="animal">
+    You chose: <i>{{animal}}</i>
+  </li> -->
+<!-- </ol> -->

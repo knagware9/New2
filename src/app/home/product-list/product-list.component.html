@@ -1,0 +1,44 @@
+<h6 class="text-center">Product List</h6>
+<div class="card blue-grey lighten-5">
+  <div class="card-content">
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr class="table-danger">
+          <th scope="col">SR</th>
+          <th scope="col">Name</th>
+          <th scope="col">Expiry Date</th>
+          <th scope="col">Price</th>
+          <th scope="col">Update/Delete</th>
+        </tr>
+      </thead>
+      <tr class="table-success" *ngFor="let product of productList; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{ product.productName}}</td>
+        <td>{{ product.expiryDate}}</td>
+        <td>{{ product.price}}</td>
+
+        <td>
+          <a class="btn" (click)="onEdit(product)">
+            <i class="fa fa-pencil-square-o"></i>
+          </a>
+          <a class="btn" (click)="onDelete(product.$key)">
+            <i class="fa fa-trash-o"></i>
+          </a>
+         
+          <mat-form-field>
+            <mat-select placeholder="Transfer To">
+              <mat-option  *ngFor="let option of options" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <a class="btn" (click)="onTransfer(product,product.$key)">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </a>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
