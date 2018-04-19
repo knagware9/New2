@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database'
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ToastrModule } from 'ngx-toastr';
 import { MatFormFieldModule, MatOption, MatOptionModule, MatSelectModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
@@ -15,7 +15,7 @@ import { UserComponent } from './user/user.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { ProductComponent } from './home/product/product.component';
 import { ProductListComponent } from './home/product-list/product-list.component';
@@ -24,7 +24,7 @@ import { ManufacturerComponent } from './home/manufacturer/manufacturer.componen
 import { DistributerComponent, DialogOverviewExampleDialog } from './home/distributer/distributer.component';
 import { RetailerComponent } from './home/retailer/retailer.component';
 import { MatDialogModule } from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'; 
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -51,7 +51,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ToastrModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
-    MatDialogModule, 
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatOptionModule,
