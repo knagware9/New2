@@ -25,6 +25,7 @@ import { DistributerComponent, DialogOverviewExampleDialog } from './home/distri
 import { RetailerComponent } from './home/retailer/retailer.component';
 import { MatDialogModule } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.FirebaseConfig),
     AngularFireDatabaseModule,
@@ -57,7 +59,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatOptionModule,
     MatSelectModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

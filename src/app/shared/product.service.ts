@@ -3,6 +3,11 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { Product } from './product.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+import { IProduct } from '../product';
 
 @Injectable()
 export class ProductService {
@@ -10,13 +15,23 @@ export class ProductService {
   productList2: AngularFireList<any>;
   productList3: AngularFireList<any>;
   selectedProduct: Product = new Product();
-  constructor(private firebase: AngularFireDatabase) {
+  constructor(private firebase: AngularFireDatabase, private http: HttpClient) {
 
   }
 
   getData() {
     this.productList = this.firebase.list('products');
     return this.productList;
+  }
+
+  private _url: string ='http://9.193.21.90:8000'
+  getNodeData(): Observable<Product[]> {
+      return this.http.get<Product[]>(this._url)
+      .catch(this.errorHandler);
+  }
+
+  errorHandler(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "Server Error");
   }
 
   getDistributerData() {

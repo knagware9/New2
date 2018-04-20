@@ -1,3 +1,4 @@
+import { ProductService } from './../../shared/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,15 +9,23 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
 
-  isLoginError: boolean = true;
-  constructor(private router: Router) { }
+  isLoginError = true;
+  constructor(private router: Router, private productSrevice: ProductService) { }
 
   ngOnInit() {
   }
 
-  OnSubmit(userName, password) {
+  public errorMessage;
 
+  public product=[];
+  OnSubmit(userName, password) {
+    this.productSrevice.getNodeData()
+    .subscribe(data => this.product = data,
+              error => this.errorMessage=error);
+              console.log("This is error: "+ this.errorMessage)
     if (userName == 1) {
+
+      debugger;
       this.router.navigate(['/home']);
      // this.router.navigate(['/manufacturer'])
     } else if (userName == 2) {
