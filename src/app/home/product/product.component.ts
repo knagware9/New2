@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductComponent implements OnInit {
 
-  constructor( productService: ProductService, private tostr: ToastrService) { }
+  constructor(private productService: ProductService, private tostr: ToastrService) { }
 
 
   ngOnInit() {
@@ -24,10 +24,9 @@ export class ProductComponent implements OnInit {
   onSubmit(productForm: NgForm) {
     // debugger;
     if (productForm.value.$key == null) {
-    
       this.productService.insertProduct(productForm.value);
       this.tostr.success('Submitted Succcessfully', 'Product Add');
-    }else {
+    } else {
       this.productService.updateProduct(productForm.value);
       this.tostr.success('Updated Succcessfully', 'Product Update');
     }
