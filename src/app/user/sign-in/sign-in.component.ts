@@ -28,9 +28,9 @@ export class SignInComponent implements OnInit {
 
 
       this.productSrevice.userAuthentication(userName,password).subscribe((data : any ) => {
-          localStorage.setItem('accessToken', data.access_token)
-          this.router.navigate(['/sample'])
-          console.log("This is Token: "+ data.access_token)
+          localStorage.setItem('accessToken', data.token)
+        //  this.router.navigate(['/sample'])
+          console.log("This is Token: "+ data.token)
       },
       (err: HttpErrorResponse)=> {
         this.isLoginError = true;
@@ -38,19 +38,20 @@ export class SignInComponent implements OnInit {
       });
 
 
-    // if (userName == 1) {
-    //   debugger;
-    //   this.router.navigate(['/home']);
-    //  // this.router.navigate(['/manufacturer'])
-    // } else if (userName == 2) {
-    //   this.router.navigate(['/distributer'])
-    // } else if (userName == 3) {
-    //   this.router.navigate(['/retailer'])
-    // } else {
-    //   this.router.navigate(['/home']);
-    // }
 
-    // debugger;
+
+
+    if (password == "org1") {
+  //   debugger;
+      this.router.navigate(['/home']);
+     // this.router.navigate(['/manufacturer'])
+    } else if (password == "org2") {
+      this.router.navigate(['/distributer'])
+    } else if (password == "org3") {
+      this.router.navigate(['/retailer'])
+    } else {
+      this.router.navigate(['/home']);
+    }
 
   }
 }

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // import { ProductService } from '../shared/product.service'
 
@@ -22,26 +23,37 @@ export class ProductComponent implements OnInit {
   }
 
   onSubmit(productForm: NgForm) {
+    console.log("submit button clicked")
+    this.productService.addProduct(productForm.value).subscribe((data:any) =>{
+      console.log("This is response data"+data);
+      this.tostr.success('Added Succcessfully', 'Product Added');
+    },
+    (err: HttpErrorResponse)=> {
+      console.log("Something went wrong: This is error")
+  
+    });
+
+
     // debugger;
-    if (productForm.value.$key == null) {
-      this.productService.insertProduct(productForm.value);
-      this.tostr.success('Submitted Succcessfully', 'Product Add');
-    } else {
-      this.productService.updateProduct(productForm.value);
-      this.tostr.success('Updated Succcessfully', 'Product Update');
-    }
+    // if (productForm.value.$key == null) {
+    //   this.productService.insertProduct(productForm.value);
+    //   this.tostr.success('Submitted Succcessfully', 'Product Add');
+    // } else {
+    //   this.productService.updateProduct(productForm.value);
+    //   this.tostr.success('Updated Succcessfully', 'Product Update');
+    // }
     this.resetForm(productForm);
 
   }
 
   resetForm(productForm?: NgForm) {
     if (productForm != null)
-    productForm.reset();
+      productForm.reset();
     this.productService.selectedProduct = {
       $key: null,
-      ownership:'',
+      ownership: '',
       productName: '',
-      manufacturerName:'',
+      manufacturerName: '',
       barcode: '',
       batchNumber: '',
       manufacturingDate: '',
@@ -50,7 +62,7 @@ export class ProductComponent implements OnInit {
       weight: '',
       temperature: '',
       price: '',
-      comment:''
+      comment: ''
     }
   }
 

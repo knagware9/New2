@@ -26,6 +26,7 @@ import { RetailerComponent } from './home/retailer/retailer.component';
 import { MatDialogModule } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SampleComponent } from './user/sample/sample.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     ManufacturerComponent,
     DistributerComponent,
     RetailerComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    SampleComponent
   ],
   entryComponents: [DialogOverviewExampleDialog],
   imports: [

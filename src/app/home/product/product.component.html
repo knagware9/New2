@@ -53,6 +53,11 @@
               placeholder="Ownership">
           </div>
           <div class="form-group">
+            <!-- <label>Ownership</label> -->
+            <input class="form-control" name="comment" #ownership="ngModel" [(ngModel)]="productService.selectedProduct.comment"
+              placeholder="Comment">
+          </div>
+          <div class="form-group">
             <!-- <label>Price</label> -->
             <div class="input-group">
               <div class="input-group-addon">
