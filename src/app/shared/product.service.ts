@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 import { Product } from './product.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { IProduct } from '../product';
 
 @Injectable()
 export class ProductService {
@@ -24,10 +23,23 @@ export class ProductService {
     return this.productList;
   }
 
-  private _url: string ='http://9.193.21.90:8000'
+  private _url: string = 'http://9.193.21.90:8000'
+  private authentication_url: string = 'http://9.193.21.90:8000';
   getNodeData(): Observable<Product[]> {
-      return this.http.get<Product[]>(this._url)
+    return this.http.get<Product[]>(this._url)
       .catch(this.errorHandler);
+  }
+
+  getSingleProduct() {
+    var headerOption = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.get(this._url,{headers: new HttpHeaders({'Authorization':'Bearer'+localStorage.getItem('userToken')})});
+
+  }
+
+  userAuthentication(username, passowrd) {
+    var data = "username=" + username + "&password=" + passowrd + "&grant_type=password";
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded' });
+    return this.http.post(this.authentication_url, data, { headers: reqHeader });
   }
 
   errorHandler(error: HttpErrorResponse) {
@@ -88,7 +100,7 @@ export class ProductService {
   }
 
   transferProduct(product: Product, type: string) {
-    if(type == "distributer"){
+    if (type == "distributer") {
       this.productList2 = this.firebase.list('Distributer');
       this.productList2.push({
         batchNumber: product.batchNumber,
@@ -105,7 +117,7 @@ export class ProductService {
         comment: product.comment
 
       });
-    }else if (type=="retailer"){
+    } else if (type == "retailer") {
       this.productList3 = this.firebase.list('Retailer');
       this.productList3.push({
         batchNumber: product.batchNumber,
