@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ProductService } from './../../shared/product.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,22 +20,35 @@ export class SignInComponent implements OnInit {
 
   public product=[];
   OnSubmit(userName, password) {
-    this.productSrevice.getNodeData()
-    .subscribe(data => this.product = data,
-              error => this.errorMessage=error);
-              console.log("This is error: "+ this.errorMessage)
-    if (userName == 1) {
+    // this.productSrevice.getNodeData()
+    // .subscribe(data => this.product = data,
+    //           error => this.errorMessage=error);
+    //           console.log("This is error: "+ this.errorMessage)
 
-      debugger;
-      this.router.navigate(['/home']);
-     // this.router.navigate(['/manufacturer'])
-    } else if (userName == 2) {
-      this.router.navigate(['/distributer'])
-    } else if (userName == 3) {
-      this.router.navigate(['/retailer'])
-    } else {
-      this.router.navigate(['/home']);
-    }
+
+
+      this.productSrevice.userAuthentication(userName,password).subscribe((data : any ) => {
+          localStorage.setItem('accessToken', data.access_token)
+          this.router.navigate(['/sample'])
+          console.log("This is Token: "+ data.access_token)
+      },
+      (err: HttpErrorResponse)=> {
+        this.isLoginError = true;
+
+      });
+
+
+    // if (userName == 1) {
+    //   debugger;
+    //   this.router.navigate(['/home']);
+    //  // this.router.navigate(['/manufacturer'])
+    // } else if (userName == 2) {
+    //   this.router.navigate(['/distributer'])
+    // } else if (userName == 3) {
+    //   this.router.navigate(['/retailer'])
+    // } else {
+    //   this.router.navigate(['/home']);
+    // }
 
     // debugger;
 
